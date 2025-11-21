@@ -8,8 +8,8 @@ from rdflib.namespace import DCTERMS
 from fsBaseModel import FairsharingRecordRequest
 
 app = FastAPI(
-    title="FAIRsharing Questionnaire API",
-    description="API for processing and submitting RDF metadata records to GitHub and FAIRsharing.",
+    title="OSTrails proxy service",
+    description="Proxy for processing and submitting RDF metadata records to GitHub and FAIRsharing.",
     version="1.2.0",
     docs_url="/questionnaire/docs",
     redoc_url=None,
@@ -55,16 +55,10 @@ def _extract_record_info(rdf_text: str):
         raise HTTPException(400, f"Invalid RDF format: {e}")
 
     uri_candidate = None
-    for _, _, o in g.triples((None, DCTERMS.identifier, None)):
-        if isinstance(o, (URIRef, Literal)):
-            uri_candidate = str(o)
+    for s, _, _ in g.triples((None, DCTERMS.identifier, None)):
+        if isinstance(s, URIRef):
+            uri_candidate = str(s)
             break
-
-    if uri_candidate is None:
-        for s in g.subjects():
-            if isinstance(s, URIRef):
-                uri_candidate = str(s)
-                break
 
     if uri_candidate is None:
         raise HTTPException(400, "No valid identifier or subject URI found in RDF.")

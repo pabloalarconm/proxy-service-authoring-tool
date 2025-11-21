@@ -1,0 +1,51 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix ftr: <https://w3id.org/ftr#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix dpv: <https://w3id.org/dpv#> .
+@prefix sio: <http://semanticscience.org/resource/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+
+<https://ostrails.github.io/assessment-component-metadata-records/metric/projMetric.ttl> a ftr:Metric, dqv:Metric, dcat:Resource ;
+    dcterms:identifier "http://upm.org/web/projMetric"^^xsd:string ;
+    dcterms:title "Project Metric"^^xsd:string ;
+    rdfs:label "projMetric"^^xsd:string ;
+    vivo:abbreviation "projMetric"^^xsd:string ;
+    dcterms:description """Project Metric description for a mocked metadata registry"""^^xsd:string ;
+    dcat:keyword "FAIR"^^xsd:string, "Data analysis"^^xsd:string, "Metric"^^xsd:string ;
+    ftr:applicationArea <http://purl.obolibrary.org/obo/NCIT_C17039> ;
+    ftr:inDimension <https://w3id.org/fair/principles/terms/I2> ;
+    dcat:version "1.0.0"^^xsd:string ;
+    adms:versionNotes "projMetric"^^xsd:string ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+    ftr:status "Active"@en ;
+    dcat:landingPage <http://upm.org/web/projMetric> ;
+    ftr:supportedBy  <http://upm.org/mytool>; 
+    dpv:IsApplicableFor <https://schema.org/Dataset>;
+    dcterms:creator <https://ror.org/03n6nwv02>; 
+    ftr:hasBenchmark <https://w3id.org/foops/benchmark/ALL> ;
+    ftr:hasPositiveValidation <http://upm.org/web/yes>; 
+    ftr:hasNegativeValidation <http://upm.org/web/no>; 
+    dcat:contactPoint  <https://orcid.org/0000-0001-5974-589X>  . 
+
+
+<https://ror.org/03n6nwv02> a vcard:Organisation ;
+    vcard:organisation-name "Universidad Politecnica de Madrid"^^xsd:string .
+
+<https://orcid.org/0000-0001-5974-589X> a vcard:Individual ;
+    vcard:fn "Pablo Alarcón-Moreno"^^xsd:string ;
+    vcard:hasEmail <mailto:pablo.alarcon@upm.es> .
+
+
+<https://w3id.org/foops/benchmark/ALL> a ftr:Benchmark, dcat:Resource ;
+    rdfs:label "General Benchmark for FAIR Principles for semantic artefacts"^^xsd:string ;
+    dcterms:identifier "https://w3id.org/foops/benchmark/ALL"^^xsd:string .
+
+
+
