@@ -1,0 +1,158 @@
+{%- import "src/_mapping.json.j2" as map with context -%}
+
+{# --- Final FAIRsharing-compatible JSON output --- #}
+{% set fairsharing_record = fairsharing_record | default({}, true) %}
+
+{%- set tag_id = map.GeneralMap.valuesTagMap["id"] | default(0) -%}
+
+{%- if tag_id == 0 -%}
+{
+  "message": "FAIR Tests and Algorithms can not be authored in FAIRsharing. So this JSON document can not be generate for this kind of FAIR assessment components."
+}
+{%- else -%}
+
+{%- set metadata = {
+    "name": map.GeneralMap["Title"] if "Title" in map.GeneralMap else "",
+    "abbreviation": map.GeneralMap["Abbreviation"] if "Abbreviation" in map.GeneralMap else "",
+    "description": map.GeneralMap["Description"] if "Description" in map.GeneralMap else "",
+    "homepage": map.GeneralMap["LandingPage"] if map.GeneralMap.get("LandingPage") else "https://fairsharing.org",
+    "contacts": [],
+    "associated_tools":[],
+    "associated_tests":[],
+    "positive_examples":[],
+    "negative_examples":[],
+} -%}
+
+{# Tool #}
+{%- for key, val in map.GeneralMap.valuesToolMap.items() -%}
+  {%- do metadata.associated_tools.append({
+    "name": val["name"],
+    "url": val["url"]
+  }) -%}
+{%- endfor -%}
+
+{# Test #}
+{%- for key, val in map.GeneralMap.valuesFACMap.items() -%}
+    {%- if val["test_url"] is defined -%}
+      {%- do metadata.associated_tests.append({
+          "url": val["test_url"] | default("")
+      }) -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{# Positive Examples #}
+{%- for key, val in map.GeneralMap.valuesPositiveMap.items() -%}
+  {%- do metadata.positive_examples.append({
+    "url": val["iri"]
+  }) -%}
+{%- endfor -%}
+
+{# Negative Examples #}
+{%- for key, val in map.GeneralMap.valuesNegativeMap.items() -%}
+  {%- do metadata.negative_examples.append({
+    "url": val["iri"]
+  }) -%}
+{%- endfor -%}
+
+{# Person #}
+{%- for key, val in map.GeneralMap.valuesPersonMap.items() -%}
+  {%- do metadata.contacts.append({
+    "contact_name": val["person_orcid_name"],
+    "contact_orcid": val["person_orcid_code"],
+    "contact_email": val["person_email"]
+  }) -%}
+{%- endfor -%}
+
+{# Metric and FAIR principles #}
+{%- set record_associations_attributes = [] -%}
+{%- for key, val in map.GeneralMap.valuesFACMap.items() -%}
+  {%- if val["metric_id"] -%}
+    {%- do record_associations_attributes.append({
+      "linked_record_id": val["metric_id"],
+      "record_assoc_label_id": 14
+    }) -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for item in map.GeneralMap.valuesFAIRPrinciples -%}
+  {%- if item["id"] is defined -%}
+    {%- do record_associations_attributes.append({
+      "linked_record_id": item["id"],
+      "record_assoc_label_id": 13
+    }) -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for item in map.GeneralMap.valuesFAIRPrinciples4RS -%}
+  {%- if item["id"] is defined -%}
+    {%- do record_associations_attributes.append({
+      "linked_record_id": item["id"],
+      "record_assoc_label_id": 13
+    }) -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{#Organisation#}
+{%- set organisation_links_attributes = [] -%}
+{%- for key, val in map.GeneralMap.valuesOrganisationMap.items() -%}
+  {%- set roles = val.role_labels if val.role_labels is defined else ["maintains"] -%}
+  {%- if val.id is defined -%}
+    {%- for label in roles -%}
+      {%- do organisation_links_attributes.append({
+        "relation": label,
+        "is_lead": true,
+        "organisation_id": val.id
+      }) -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- for label in roles -%}
+      {%- do organisation_links_attributes.append({
+        "relation": label,
+        "is_lead": true,
+        "organisation_attributes": {
+          "organisation_type_ids": val.organisation_type_ids | default([]),
+          "name": val.label | default(""),
+          "homepage": val.homepage | default(""),
+          "country_ids": val.country_ids | default([]),
+          "ror_link": val.url | default("")
+        }
+      }) -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{# Area of Knowledge - Subject #}
+{%- set subject_ids = [] -%}
+{%- for key, val in map.GeneralMap.valuesThemeMap.items() -%}
+  {%- do subject_ids.append(val["iri"]) -%}
+{%- endfor -%}
+
+{# Keyword - Domain #}
+{%- set domain_ids = [] -%}
+{%- for key, val in map.GeneralMap.valuesKeywordMap.items() -%}
+  {%- do domain_ids.append(val["iri"]) -%}
+{%- endfor -%}
+
+{# Digital Object type #}
+{%- set digital_objects_ids = [] -%}
+{%- for item in map.GeneralMap.valuesDigitalObject -%}
+  {%- if item["id"] is defined -%}
+    {%- do digital_objects_ids.append(item["id"]) -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- set fairsharing_record = {
+  "fairsharing_record": {
+    "metadata": metadata,
+    "record_type_id": tag_id,
+    "subject_ids": subject_ids,
+    "domain_ids": domain_ids,
+    "record_associations_attributes":record_associations_attributes,
+    "object_type_ids": digital_objects_ids,
+    "organisation_links_attributes": organisation_links_attributes
+  }
+} -%}
+
+{{ fairsharing_record | default({}) | tojson(4) }}
+
+{%- endif -%}

@@ -1,0 +1,90 @@
+
+
+{
+    "Title": "Project Metric",
+    "Description": "Project Metric description for a mocked metadata registry",
+    "Abbreviation": "projMetric",
+    "License": "http://creativecommons.org/licenses/by/4.0/",
+    "Version": "1.0.0",
+    "VersionNotes": "First stable version",
+    "LandingPage": "http://upm.org/web/projMetric",
+    "valuesKeywordMap": {
+        "c4d2397c-107f-41c0-b7a3-ff7fa3b51a0a": {
+            "iri": "http://www.fairsharing.org/ontology/domain/DRAO_0000281",
+            "label": "FAIR"
+        },
+        "48e5803a-3063-4044-b2aa-ec8b575cd9c4": {
+            "iri": "http://edamontology.org/operation_2945",
+            "label": "Data analysis"
+        }
+    },
+    "valuesKeywordManualMap": {
+        "c4d2397c-107f-41c0-b7a3-ff7fa3b51a0a": {
+            "label": "Metric"
+        }
+    },
+    "valuesThemeMap": {
+        "f2582985-e6f1-4e05-baf3-f1f08bbac4d6": {
+            "iri": "http://purl.obolibrary.org/obo/NCIT_C17039",
+            "label": "Public Health"
+        }
+    },
+    "valuesThemeManualMap": {},
+    "valuesToolMap": {
+        "5d5d867c-7d66-4499-b0f8-5186bafee271": {
+            "url": "http://upm.org/mytool",
+            "name": "Mytool"
+        }
+    },
+    "valuesOrganisationMap": {
+        "a80f1078-aa8a-47fc-9f8d-63b1d1e50aca": {
+            "id": 2968,
+            "url": "https://ror.org/03n6nwv02",
+            "label": "Universidad Politecnica de Madrid"
+        }
+    },
+    "valuesPersonMap": {
+        "5dd0af6f-a594-49ac-b61d-4c166c0ad38e": {
+            "person_email": "pablo.alarcon@upm.es",
+            "person_orcid_code": "0000-0001-5974-589X",
+            "person_orcid_name": "Pablo Alarcón-Moreno"
+        }
+    },
+    "valuesFACMap": {
+        "aa23fa88-1239-4020-8e21-2690f4c30f58": {
+            "benchmark_id": 6306,
+            "benchmark_name": "General Benchmark for FAIR Principles for semantic artefacts",
+            "benchmark_url": "https://w3id.org/foops/benchmark/ALL"
+        }
+    },
+    "valuesDigitalObject": [
+        {
+            "id": 5,
+            "iri": "https://schema.org/Dataset",
+            "label": "dataset"
+        }
+    ],
+    "valuesTagMap": {
+        "id": 5,
+        "name": "metric"
+    },
+    "valuesFAIRPrinciples": [
+        {
+            "id": 6298,
+            "name": "FAIR Principles I2: (meta)data use vocabularies that follow FAIR principles",
+            "url": "https://w3id.org/fair/principles/terms/I2"
+        }
+    ],
+    "valuesFAIRPrinciples4RS": [],
+    "valuesPositiveMap": {
+        "2f37cb00-bff6-472e-ba8c-3729b8dd6619": {
+            "iri": "http://upm.org/web/yes"
+        }
+    },
+    "valuesNegativeMap": {
+        "7c4555a3-238d-497b-b11f-e5b7ef577e87": {
+            "iri": "http://upm.org/web/no"
+        }
+    },
+    "all": {}
+}

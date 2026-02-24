@@ -12,7 +12,7 @@ This service acts as a **proxy API** to authenticate and submit FAIR assessment 
 version: '3'
 services:
   api:
-    image: pabloalarconm/proxy-fs:1.2.0
+    image: pabloalarconm/proxy-fs:1.3.0
     ports:
       - "8000:8000"
     environment:
@@ -40,17 +40,10 @@ services:
 | Method | Path      | Description                                       |
 | ------ | --------- | ------------------------------------------------- |
 | GET    | `/questionnaire/docs`   | Opens interactive API documentation (Swagger UI).        |
-| POST   | `/questionnaire/submit` | Submits a FAIRsharing record.                            |
+| HEAD   | `/questionnaire/docs`   |         |
+| POST   | `/questionnaire/submit` | Submits a FAIRsharing record and Github                    |
 | POST   | `/questionnaire/push`   | Git push a Github record and FDP test registration with your RDF DCAT-based record |
 
 
 ### Accessing API Documentation
 Navigate to http://YOUR_DOMAIN/questionnaire/docs to explore and test the API interactively via Swagger UI.
-
-### Submitting a Github and FDP Record
-
-Find an example of a RDF DCAT-based record submission in Github and FDP [here](/proxy-fs/test/exploit_test.sh) via API using `/push`.
-
-### Submitting a FAIRsharing Record
-
-Find an example of a FAIRsharing record submission [here](/proxy-fs/test/exploit_test.sh) via API using `/submit`.
