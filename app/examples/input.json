@@ -7,7 +7,7 @@
     "License": "http://creativecommons.org/licenses/by/4.0/",
     "Version": "1.0.0",
     "VersionNotes": "First stable version",
-    "LandingPage": "http://upm.org/web/projMetric",
+    "LandingPage": "",
     "valuesKeywordMap": {
         "c4d2397c-107f-41c0-b7a3-ff7fa3b51a0a": {
             "iri": "http://www.fairsharing.org/ontology/domain/DRAO_0000281",

@@ -15,7 +15,7 @@
     "name": map.GeneralMap["Title"] if "Title" in map.GeneralMap else "",
     "abbreviation": map.GeneralMap["Abbreviation"] if "Abbreviation" in map.GeneralMap else "",
     "description": map.GeneralMap["Description"] if "Description" in map.GeneralMap else "",
-    "homepage": map.GeneralMap["LandingPage"] if map.GeneralMap.get("LandingPage") else "https://fairsharing.org",
+    "homepage": map.GeneralMap["LandingPage"] if map.GeneralMap.get("LandingPage") else "https://ostrails.github.io/assessment-component-metadata-records/" ~ map.GeneralMap.valuesTagMap.name ~ "/" ~ map.GeneralMap.Abbreviation ~ ".ttl",
     "contacts": [],
     "associated_tools":[],
     "associated_tests":[],

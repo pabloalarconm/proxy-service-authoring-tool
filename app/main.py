@@ -406,22 +406,22 @@ async def submit_record(input_json: dict = Body(...)):
 
 # For testing the templates:
 
-# @app.post("/render/json", response_class=JSONResponse)
-# async def render_json(input_json: dict = Body(...)):
-#     """
-#     Render FAIRsharing-compatible JSON
-#     """
-#     rendered = render_json_template(input_json)
-#     return JSONResponse(content=rendered)
+@app.post("/questionnaire/render/json", response_class=JSONResponse)
+async def render_json(input_json: dict = Body(...)):
+    """
+    Render FAIRsharing-compatible JSON
+    """
+    rendered = render_json_template(input_json)
+    return JSONResponse(content=rendered)
 
 
-# @app.post("/render/turtle", response_class=PlainTextResponse)
-# async def render_turtle(input_json: dict = Body(...)):
-#     """
-#     Render FAIRsharing Turtle RDF
-#     """
-#     rendered = render_turtle_template(input_json)
-#     return PlainTextResponse(content=rendered, media_type="text/turtle")
+@app.post("/questionnaire/render/turtle", response_class=PlainTextResponse)
+async def render_turtle(input_json: dict = Body(...)):
+    """
+    Render FAIRsharing Turtle RDF
+    """
+    rendered = render_turtle_template(input_json)
+    return PlainTextResponse(content=rendered, media_type="text/turtle")
 
 
 if __name__ == "__main__":
