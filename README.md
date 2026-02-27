@@ -35,6 +35,7 @@ services:
 | PASSWORD  | Your FAIRsharing password.           |
 | GITHUB_TOKEN  | Your Github access token.        |
 
+
 ## API Endpoints
 
 | Method | Path      | Description                                       |
